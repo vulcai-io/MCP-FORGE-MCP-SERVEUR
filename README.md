@@ -1,10 +1,20 @@
 # mcp-forge — MCP Server
 
-Generate production-ready MCP servers from any source: OpenAPI/Swagger specs, GraphQL APIs, codebases (23 languages incl. COBOL & Fortran), CLI tools and websites.
+Generate production-ready MCP servers from any source: OpenAPI/Swagger specs, GraphQL APIs, codebases (23 languages incl. COBOL & Fortran), CLI tools and websites. Pass a URL — mcp-forge handles parsing, LLM enrichment, and quality scoring (0–10 on 6 criteria).
+
+This is the public mcp-forge MCP server. Connect it to an AI client such as Claude or Cursor and the agent can generate an MCP server for you from a public URL, with no pre-parsing. For local codebases, CLI tools and any source that is not publicly reachable over HTTPS, use the [mcp-forge CLI](https://github.com/vulcai-io/MCP-FORGE-CLI) instead.
 
 **SSE endpoint**: `https://mcp.mcp-forge.vulcai.io/sse`  
 **Auth**: `Authorization: Bearer <YOUR_LICENSE_KEY>`  
-**Get a license**: https://mcp-forge.vulcai.io/register
+**Get a license**: <https://mcp-forge.vulcai.io/register> (free during the public beta)
+
+## Try it
+
+Once the server is connected, ask your agent:
+
+> Generate an MCP server from https://petstore3.swagger.io/api/v3/openapi.json
+
+The result includes a download URL for the generated server, a preview of its first tools, and its quality score (`eval_score`, 0–10) with a per-criterion report.
 
 ## Tools
 
@@ -42,6 +52,8 @@ Retrieve quota usage for the current license: `sources_used`, `sources_limit` (o
 
 ## Configuration
 
+Generic MCP client configuration:
+
 ```json
 {
   "mcpServers": {
@@ -55,9 +67,27 @@ Retrieve quota usage for the current license: `sources_used`, `sources_limit` (o
 }
 ```
 
+Claude Code:
+
+```bash
+claude mcp add --transport sse mcp-forge https://mcp.mcp-forge.vulcai.io/sse \
+  --header "Authorization: Bearer <YOUR_LICENSE_KEY>"
+```
+
+A license key is required. Keep it out of any repository and use your client's secret handling where available.
+
+## Limitations
+
+- GraphQL generation needs introspection enabled on the endpoint, which is often disabled in production.
+- JavaScript-only websites (single-page apps) are not analyzed by this server: use the CLI with its `[web]` extra.
+- A generated server usually needs some adjustments for your own configuration. The evaluator report tells you where to look.
+- If a generation returns 0 tools, see the [troubleshooting guide](https://mcp-forge.vulcai.io/docs/troubleshooting/no-tools).
+
 ## Links
 
-- Homepage: https://mcp-forge.vulcai.io
-- CLI on PyPI: https://pypi.org/project/vulcai-mcp-forge-cli/
-- Trust & Security: https://mcp-forge.vulcai.io/trust
-- Troubleshooting: https://mcp-forge.vulcai.io/docs/troubleshooting/no-tools
+- Homepage: <https://mcp-forge.vulcai.io>
+- CLI repository: <https://github.com/vulcai-io/MCP-FORGE-CLI>
+- CLI on PyPI: <https://pypi.org/project/vulcai-mcp-forge-cli/>
+- Trust & Security: <https://mcp-forge.vulcai.io/trust>
+- Troubleshooting: <https://mcp-forge.vulcai.io/docs/troubleshooting/no-tools>
+- Changelog: [CHANGELOG.md](CHANGELOG.md)
