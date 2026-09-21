@@ -11,6 +11,20 @@ Changes to the CLI (`vulcai-mcp-forge-cli` on PyPI) are tracked in the
 
 ---
 
+## [0.2.5] - 2026-09-22
+
+### Changed
+
+- No change to the tools or their responses. The version returned by `get_health`
+  moves to `0.2.5` (release that adds the MIT licence to the CLI package).
+
+## [0.2.4] - 2026-09-21
+
+### Fixed
+
+- Quota error messages ("Upgrade your plan...") now point to the billing page,
+  https://mcp-forge.vulcai.io/dashboard/billing, instead of a domain that does not exist.
+
 ## [0.2.3] - 2026-07-20
 
 ### Added
