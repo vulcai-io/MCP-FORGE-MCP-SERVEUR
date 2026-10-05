@@ -82,6 +82,7 @@ A license key is required. Keep it out of any repository and use your client's s
 - JavaScript-only websites (single-page apps) are not analyzed by this server: use the CLI with its `[web]` extra.
 - A generated server usually needs some adjustments for your own configuration. The evaluator report tells you where to look.
 - If a generation returns 0 tools, see the [troubleshooting guide](https://mcp-forge.vulcai.io/docs/troubleshooting/no-tools).
+- Codebase analysis (including COBOL and Fortran) is a CLI-only source — see the [mcp-forge CLI](https://github.com/vulcai-io/MCP-FORGE-CLI) for local directories. For COBOL specifically, only *modern, isolated* subprograms (`PROGRAM-ID` with an explicit `PROCEDURE DIVISION USING <inputs...> <output>.` clause) are executed; legacy monolithic COBOL (paragraphs sharing global `WORKING-STORAGE` state) returns an explicit error rather than a guessed, possibly wrong, result.
 
 ## Links
 
