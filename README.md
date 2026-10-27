@@ -4,7 +4,7 @@ Generate production-ready MCP servers from any source: OpenAPI/Swagger specs, Gr
 
 This is the public mcp-forge MCP server. Connect it to an AI client such as Claude or Cursor and the agent can generate an MCP server for you from a public URL, with no pre-parsing. For local codebases, CLI tools and any source that is not publicly reachable over HTTPS, use the [mcp-forge CLI](https://github.com/vulcai-io/MCP-FORGE-CLI) instead.
 
-**SSE endpoint**: `https://mcp.mcp-forge.vulcai.io/sse`  
+**MCP endpoint** (Streamable HTTP): `https://mcp.mcp-forge.vulcai.io/mcp`  
 **Auth**: `Authorization: Bearer <YOUR_LICENSE_KEY>`  
 **Get a license**: <https://mcp-forge.vulcai.io/register> (free during the public beta)
 
@@ -58,7 +58,7 @@ Generic MCP client configuration:
 {
   "mcpServers": {
     "mcp-forge": {
-      "url": "https://mcp.mcp-forge.vulcai.io/sse",
+      "url": "https://mcp.mcp-forge.vulcai.io/mcp",
       "headers": {
         "Authorization": "Bearer <YOUR_LICENSE_KEY>"
       }
@@ -70,7 +70,7 @@ Generic MCP client configuration:
 Claude Code:
 
 ```bash
-claude mcp add --transport sse mcp-forge https://mcp.mcp-forge.vulcai.io/sse \
+claude mcp add --transport http mcp-forge https://mcp.mcp-forge.vulcai.io/mcp \
   --header "Authorization: Bearer <YOUR_LICENSE_KEY>"
 ```
 
